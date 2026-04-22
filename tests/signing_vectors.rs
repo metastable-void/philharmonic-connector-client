@@ -26,6 +26,7 @@ fn sample_claims() -> ConnectorTokenClaims {
     ConnectorTokenClaims {
         iss: "lowerer.main".to_owned(),
         exp: UnixMillis(1_924_992_000_000),
+        iat: UnixMillis(1_924_991_880_000),
         kid: "lowerer.main-2026-04-22-3c8a91d0".to_owned(),
         realm: "llm".to_owned(),
         tenant: Uuid::parse_str("11111111-2222-4333-8444-555555555555")

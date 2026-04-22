@@ -9,9 +9,17 @@ this crate adheres to
 
 ## [Unreleased]
 
-Implementation pending. See the
-[Philharmonic workspace ROADMAP](https://github.com/metastable-void/philharmonic-workspace/blob/main/ROADMAP.md)
-for the phase that populates this crate.
+### Added
+
+- Added `LowererSigningKey` with `Zeroizing<[u8; 32]>` seed storage and
+  per-call transient `SigningKey` reconstruction for minting.
+- Added `mint_token` COSE_Sign1 minting flow (`alg=-8`, protected `kid`,
+  CBOR claim serialization via `ciborium`).
+- Added `MintError` taxonomy for input validation, serialization, and signing
+  failures.
+- Added known-answer tests loading committed Wave A vectors and asserting
+  byte-for-byte equality with `wave_a_cose_sign1.hex`.
+- Added crate-level exports and README usage documentation.
 
 ## [0.0.0]
 

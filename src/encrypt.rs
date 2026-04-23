@@ -12,7 +12,7 @@ use rand_core::CryptoRngCore;
 use secrecy::{ExposeSecret, SecretBox};
 use serde::Serialize;
 use x25519_dalek::{EphemeralSecret, PublicKey, StaticSecret};
-use zeroize::Zeroizing;
+use zeroize::{Zeroize, Zeroizing};
 
 use crate::error::EncryptError;
 use philharmonic_connector_common::{ConnectorEncryptedPayload, RealmPublicKey, Uuid};
@@ -176,9 +176,7 @@ fn build_encrypt0(
     ikm[..KEM_SS_LEN].copy_from_slice(&materials.kem_ss[..]);
     ikm[KEM_SS_LEN..].copy_from_slice(&materials.ecdh_ss[..]);
 
-    let (prk, hkdf) = Hkdf::<sha2::Sha256>::extract(Some(b""), &ikm[..]);
-    let mut prk_bytes = Zeroizing::new([0_u8; AEAD_KEY_LEN]);
-    prk_bytes.copy_from_slice(prk.as_ref());
+    let (_, hkdf) = Hkdf::<sha2::Sha256>::extract(Some(b""), &ikm[..]);
 
     let mut aead_key_bytes = [0_u8; AEAD_KEY_LEN];
     hkdf.expand(HKDF_INFO, &mut aead_key_bytes)
@@ -187,6 +185,7 @@ fn build_encrypt0(
         })?;
 
     let aead_key = SecretBox::new(Box::new(aead_key_bytes));
+    aead_key_bytes.zeroize();
 
     let protected = HeaderBuilder::new()
         .algorithm(iana::Algorithm::A256GCM)

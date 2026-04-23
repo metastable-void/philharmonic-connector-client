@@ -37,6 +37,11 @@ this crate adheres to
   (`kem_ct`/`kem_ss`, ECDH, HKDF key, `external_aad`, protected header,
   `Enc_structure`, ciphertext+tag, final envelope, payload hash).
 
+### Changed
+
+- Tightened Wave B AEAD key handling by zeroizing stack `aead_key_bytes` immediately after copying into `SecretBox`.
+- Removed dead HKDF `prk_bytes` scratch handling and unused PRK tuple binding; HKDF expansion continues through the existing `hkdf` context unchanged.
+
 ## [0.0.0]
 
 Name reservation on crates.io. No functional content yet.

@@ -29,16 +29,16 @@ https://github.com/metastable-void/philharmonic-workspace
 
 ## What's out of scope
 
-- Payload **encryption** (COSE_Encrypt0, hybrid ML-KEM-768 + X25519
-  KEM, AES-256-GCM). Wave A ships only the mint path; the encrypt
-  path lands with Wave B and will share this same crate.
 - Key loading from filesystem / environment / KMS. Per the workspace
   library-boundary convention, this library takes raw bytes
-  (`Zeroizing<[u8; 32]>`); a bin crate is responsible for sourcing
+  (`Zeroizing<[u8; 32]>` Ed25519 seeds, `ML-KEM-768` and `X25519`
+  realm public-key bytes); a bin crate is responsible for sourcing
   those bytes.
 - Claim-set assembly. Callers build `ConnectorTokenClaims` from
   their workflow + policy inputs; this crate only signs what it's
   given.
+- Plaintext assembly. Callers build the payload byte slice;
+  `encrypt_payload` seals whatever it's given.
 
 ## Quick start
 

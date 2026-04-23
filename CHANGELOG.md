@@ -25,6 +25,17 @@ this crate adheres to
   unchanged (ciborium serializes it positionally). Committed Wave A
   reference vectors at `docs/crypto-vectors/wave-a/` were regenerated to
   reflect the 10-entry claim-map layout.
+- Added Wave B `encrypt_payload` and deterministic
+  `encrypt_payload_with_test_inputs` APIs for lowerer-side hybrid-KEM
+  encapsulation (ML-KEM-768 + X25519), HKDF-SHA256 key derivation,
+  AES-256-GCM sealing, and COSE_Encrypt0 envelope construction.
+- Added `AeadAadInputs` and deterministic `EncryptTestInputs` helper inputs
+  for payload-AAD binding and byte-for-byte vector reproduction.
+- Added `EncryptError` taxonomy and re-exports for the Wave B encryption
+  surface.
+- Added committed-vector known-answer tests for every Wave B stage
+  (`kem_ct`/`kem_ss`, ECDH, HKDF key, `external_aad`, protected header,
+  `Enc_structure`, ciphertext+tag, final envelope, payload hash).
 
 ## [0.0.0]
 

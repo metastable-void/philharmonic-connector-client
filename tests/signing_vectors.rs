@@ -4,19 +4,15 @@ use philharmonic_connector_client::{
     ConnectorTokenClaims, LowererSigningKey, MintError, Sha256, UnixMillis, Uuid, Zeroizing,
 };
 
-const SEED_HEX: &str = include_str!("../../docs/crypto-vectors/wave-a/wave_a_seed.hex");
-const PUBLIC_HEX: &str = include_str!("../../docs/crypto-vectors/wave-a/wave_a_public.hex");
-const PAYLOAD_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-a/wave_a_payload_plaintext.hex");
-const PAYLOAD_HASH_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-a/wave_a_payload_hash.hex");
-const CLAIMS_CBOR_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-a/wave_a_claims.cbor.hex");
-const PROTECTED_HEX: &str = include_str!("../../docs/crypto-vectors/wave-a/wave_a_protected.hex");
-const SIG_STRUCTURE1_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-a/wave_a_sig_structure1.hex");
-const SIGNATURE_HEX: &str = include_str!("../../docs/crypto-vectors/wave-a/wave_a_signature.hex");
-const COSE_SIGN1_HEX: &str = include_str!("../../docs/crypto-vectors/wave-a/wave_a_cose_sign1.hex");
+const SEED_HEX: &str = include_str!("vectors/wave-a/wave_a_seed.hex");
+const PUBLIC_HEX: &str = include_str!("vectors/wave-a/wave_a_public.hex");
+const PAYLOAD_HEX: &str = include_str!("vectors/wave-a/wave_a_payload_plaintext.hex");
+const PAYLOAD_HASH_HEX: &str = include_str!("vectors/wave-a/wave_a_payload_hash.hex");
+const CLAIMS_CBOR_HEX: &str = include_str!("vectors/wave-a/wave_a_claims.cbor.hex");
+const PROTECTED_HEX: &str = include_str!("vectors/wave-a/wave_a_protected.hex");
+const SIG_STRUCTURE1_HEX: &str = include_str!("vectors/wave-a/wave_a_sig_structure1.hex");
+const SIGNATURE_HEX: &str = include_str!("vectors/wave-a/wave_a_signature.hex");
+const COSE_SIGN1_HEX: &str = include_str!("vectors/wave-a/wave_a_cose_sign1.hex");
 
 fn decode_hex_file(input: &str) -> Vec<u8> {
     hex::decode(input.trim()).expect("vector hex must decode")

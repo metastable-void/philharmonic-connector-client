@@ -9,49 +9,29 @@ use philharmonic_connector_common::{RealmId, RealmPublicKey};
 use serde::Serialize;
 use x25519_dalek::{PublicKey, StaticSecret};
 
-const WAVE_B_MLKEM_KEYGEN_D_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_keygen_d.hex");
-const WAVE_B_MLKEM_KEYGEN_Z_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_keygen_z.hex");
-const WAVE_B_MLKEM_ENCAPS_M_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_encaps_m.hex");
-const WAVE_B_MLKEM_PUBLIC_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_public.hex");
-const WAVE_B_MLKEM_SECRET_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_secret.hex");
-const WAVE_B_MLKEM_CT_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_ct.hex");
-const WAVE_B_MLKEM_SS_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_mlkem_ss.hex");
-const WAVE_B_X25519_REALM_SK_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_x25519_realm_sk.hex");
-const WAVE_B_X25519_REALM_PK_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_x25519_realm_pk.hex");
-const WAVE_B_X25519_EPH_SK_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_x25519_eph_sk.hex");
-const WAVE_B_X25519_EPH_PK_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_x25519_eph_pk.hex");
-const WAVE_B_ECDH_SS_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_ecdh_ss.hex");
-const WAVE_B_HKDF_IKM_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_hkdf_ikm.hex");
-const WAVE_B_AEAD_KEY_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_aead_key.hex");
-const WAVE_B_EXTERNAL_AAD_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_external_aad.hex");
-const WAVE_B_NONCE_HEX: &str = include_str!("../../docs/crypto-vectors/wave-b/wave_b_nonce.hex");
-const WAVE_B_PLAINTEXT_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_plaintext.hex");
-const WAVE_B_PROTECTED_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_protected.hex");
-const WAVE_B_ENC_STRUCTURE_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_enc_structure.hex");
+const WAVE_B_MLKEM_KEYGEN_D_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_keygen_d.hex");
+const WAVE_B_MLKEM_KEYGEN_Z_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_keygen_z.hex");
+const WAVE_B_MLKEM_ENCAPS_M_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_encaps_m.hex");
+const WAVE_B_MLKEM_PUBLIC_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_public.hex");
+const WAVE_B_MLKEM_SECRET_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_secret.hex");
+const WAVE_B_MLKEM_CT_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_ct.hex");
+const WAVE_B_MLKEM_SS_HEX: &str = include_str!("vectors/wave-b/wave_b_mlkem_ss.hex");
+const WAVE_B_X25519_REALM_SK_HEX: &str = include_str!("vectors/wave-b/wave_b_x25519_realm_sk.hex");
+const WAVE_B_X25519_REALM_PK_HEX: &str = include_str!("vectors/wave-b/wave_b_x25519_realm_pk.hex");
+const WAVE_B_X25519_EPH_SK_HEX: &str = include_str!("vectors/wave-b/wave_b_x25519_eph_sk.hex");
+const WAVE_B_X25519_EPH_PK_HEX: &str = include_str!("vectors/wave-b/wave_b_x25519_eph_pk.hex");
+const WAVE_B_ECDH_SS_HEX: &str = include_str!("vectors/wave-b/wave_b_ecdh_ss.hex");
+const WAVE_B_HKDF_IKM_HEX: &str = include_str!("vectors/wave-b/wave_b_hkdf_ikm.hex");
+const WAVE_B_AEAD_KEY_HEX: &str = include_str!("vectors/wave-b/wave_b_aead_key.hex");
+const WAVE_B_EXTERNAL_AAD_HEX: &str = include_str!("vectors/wave-b/wave_b_external_aad.hex");
+const WAVE_B_NONCE_HEX: &str = include_str!("vectors/wave-b/wave_b_nonce.hex");
+const WAVE_B_PLAINTEXT_HEX: &str = include_str!("vectors/wave-b/wave_b_plaintext.hex");
+const WAVE_B_PROTECTED_HEX: &str = include_str!("vectors/wave-b/wave_b_protected.hex");
+const WAVE_B_ENC_STRUCTURE_HEX: &str = include_str!("vectors/wave-b/wave_b_enc_structure.hex");
 const WAVE_B_CIPHERTEXT_AND_TAG_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_ciphertext_and_tag.hex");
-const WAVE_B_COSE_ENCRYPT0_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_cose_encrypt0.hex");
-const WAVE_B_PAYLOAD_HASH_HEX: &str =
-    include_str!("../../docs/crypto-vectors/wave-b/wave_b_payload_hash.hex");
+    include_str!("vectors/wave-b/wave_b_ciphertext_and_tag.hex");
+const WAVE_B_COSE_ENCRYPT0_HEX: &str = include_str!("vectors/wave-b/wave_b_cose_encrypt0.hex");
+const WAVE_B_PAYLOAD_HASH_HEX: &str = include_str!("vectors/wave-b/wave_b_payload_hash.hex");
 
 fn decode_hex_file(input: &str) -> Vec<u8> {
     hex::decode(input.trim()).expect("vector hex must decode")

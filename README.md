@@ -83,7 +83,7 @@ material never lives longer than one signature.
   without a Wave B ciphertext in hand; real deployments will hash
   actual ciphertexts.
 - Known-answer test vectors live under
-  [`docs/crypto-vectors/wave-a/`](../docs/crypto-vectors/wave-a/)
+  [`tests/vectors/wave-a/`](../tests/vectors/wave-a/)
   (generated with an external Python reference, committed, and
   verified byte-for-byte by the test suite).
 - Design background:

@@ -25,7 +25,7 @@ this crate adheres to
 - Bump `philharmonic-connector-common` pin `"0.1"` → `"0.2"`. Picks up the
   new `iat` claim on `ConnectorTokenClaims`; signing code passes it through
   unchanged (ciborium serializes it positionally). Committed Wave A
-  reference vectors at `docs/crypto-vectors/wave-a/` were regenerated to
+  reference vectors at `tests/vectors/wave-a/` were regenerated to
   reflect the 10-entry claim-map layout.
 - Added Wave B `encrypt_payload` and deterministic
   `encrypt_payload_with_test_inputs` APIs for lowerer-side hybrid-KEM
